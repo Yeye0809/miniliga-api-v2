@@ -27,12 +27,16 @@ public class Torneo {
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
 
-    @OneToMany
+    @OneToMany(mappedBy = "torneo")
     @JsonManagedReference
     private List<Equipo> equipos;
-    @OneToMany
+    @OneToMany(mappedBy = "torneo")
     @JsonManagedReference
     private List<Partido> partidos;
+
+    @OneToMany( mappedBy = "torneo")
+    @JsonManagedReference
+    private List<EstadisticaJugador> estadisticaJugadores;
     private Boolean activo;
 
 

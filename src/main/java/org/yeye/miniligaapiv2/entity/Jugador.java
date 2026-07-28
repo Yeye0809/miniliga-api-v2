@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.yeye.miniligaapiv2.enums.Posicion;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -16,15 +19,19 @@ public class Jugador {
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
     private String nombre;
     private String apellido;
     private String telefono;
-    private Integer goles;
+    private Posicion posicion;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "equipo_id")
     @JsonManagedReference
     private Equipo equipo;
+
+    @OneToMany( mappedBy = "jugador")
+    @JsonManagedReference
+    private List<EstadisticaJugador> estadisticaJugadores;
 
 }

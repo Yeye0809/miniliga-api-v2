@@ -1,33 +1,33 @@
 package org.yeye.miniligaapiv2.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Equipo {
+public class EstadisticaJugador {
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nombre;
-
-    @OneToMany(mappedBy = "equipo")
-    private List<Jugador> jugadores;
+    private Integer goles;
+    private Integer asistencias;
+    private Integer amarillas;
+    private Integer rojas;
 
     @ManyToOne
+    @JoinColumn( name = "jugador_id")
+    @JsonBackReference
+    private Jugador jugador;
+    @ManyToOne
     @JoinColumn(name = "torneo_id")
+    @JsonBackReference
     private Torneo torneo;
-
-    @OneToOne
-    @JoinColumn(name = "entrenador_id")
-    private Entrenador entrenador;
 }
