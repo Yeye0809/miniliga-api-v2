@@ -3,7 +3,6 @@ package org.yeye.miniligaapiv2.entity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
-import org.yeye.miniligaapiv2.enums.Posicion;
 
 import java.util.List;
 
@@ -21,8 +20,7 @@ public class Jugador {
     private String nombre;
     private String apellido;
     private String telefono;
-    @Enumerated(EnumType.STRING)
-    private Posicion posicion;
+    private String posicion;
 
     @ManyToOne
     @JoinColumn(name = "equipo_id")

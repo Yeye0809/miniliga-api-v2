@@ -10,7 +10,7 @@ public class JugadorMapper {
                 .id(jugador.getId())
                 .nombre(jugador.getNombre())
                 .apellido(jugador.getApellido())
-                .posicion(jugador.getPosicion().name())
+                .posicion(jugador.getPosicion())
                 .telefono(jugador.getTelefono())
                 .equipo(jugador.getEquipo().getNombre())
                 .build();
