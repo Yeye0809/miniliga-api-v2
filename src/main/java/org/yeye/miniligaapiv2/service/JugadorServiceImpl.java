@@ -11,6 +11,7 @@ import org.yeye.miniligaapiv2.repository.EquipoRepository;
 import org.yeye.miniligaapiv2.repository.JugadorRepository;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class JugadorServiceImpl implements  JugadorService {
@@ -49,5 +50,30 @@ public class JugadorServiceImpl implements  JugadorService {
     @Override
     public JugadorResponseDto getJugadorById(Long id){
         return jugadorRepository.findById(id).map(JugadorMapper::toDto).orElseThrow(()-> new RuntimeException("Jugador no encontrado"));
+    }
+
+    @Override
+    public JugadorResponseDto actualizarJugador(Long id, Map<String, Object> params){
+        Jugador jugador = jugadorRepository.findById(id).orElseThrow(() -> new RuntimeException("Jugador no encontrado"));
+
+        if(params.containsKey("nombre")){
+            jugador.setNombre((String) params.get("nombre"));
+        }
+
+        if(params.containsKey("apellido")){
+            jugador.setApellido((String) params.get("apellido"));
+        }
+
+        if(params.containsKey("telefono")){
+            jugador.setTelefono( (String) params.get("telefono"));
+        }
+
+        if( params.containsKey("posicion") ){
+            jugador.setPosicion( (String) params.get("posicion"));
+        }
+
+        Jugador actualizado = jugadorRepository.save(jugador);
+
+        return JugadorMapper.toDto(actualizado);
     }
 }

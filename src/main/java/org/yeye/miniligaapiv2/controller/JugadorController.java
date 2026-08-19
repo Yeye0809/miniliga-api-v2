@@ -8,6 +8,7 @@ import org.yeye.miniligaapiv2.dto.JugadorResponseDto;
 import org.yeye.miniligaapiv2.service.JugadorService;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/jugador")
@@ -29,5 +30,10 @@ public class JugadorController {
     @GetMapping("/{id}")
     public ResponseEntity<JugadorResponseDto> obtenerJugadorById(@PathVariable Long id) {
         return ResponseEntity.ok(jugadorService.getJugadorById(id));
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<JugadorResponseDto> actualizarJugador(@PathVariable Long id, @RequestBody Map<String, Object> params) {
+        return ResponseEntity.ok(jugadorService.actualizarJugador(id, params));
     }
 }
