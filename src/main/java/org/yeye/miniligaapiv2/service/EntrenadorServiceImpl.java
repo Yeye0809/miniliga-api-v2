@@ -9,6 +9,7 @@ import org.yeye.miniligaapiv2.mapper.EntrenadorMapper;
 import org.yeye.miniligaapiv2.repository.EntrenadorRepository;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class EntrenadorServiceImpl implements EntrenadorService {
@@ -36,6 +37,26 @@ public class EntrenadorServiceImpl implements EntrenadorService {
     @Override
     public EntrenadorResponseDto getEntrenadorById(Long id){
         return entrenadorRepository.findById(id).map(EntrenadorMapper::toDto).orElseThrow(()-> new RuntimeException("Entrenador not found!"));
+    }
+
+    @Override
+    public EntrenadorResponseDto actualizarEntrenador(Long id, Map<String, Object> params){
+        Entrenador entrenador = entrenadorRepository.findById(id).orElseThrow(()-> new RuntimeException("Entrenador not found!"));
+
+        if( params.containsKey("nombre")){
+            entrenador.setNombre(params.get("nombre").toString());
+        }
+
+        if( params.containsKey("apellido")){
+            entrenador.setApellido(params.get("apellido").toString());
+        }
+
+        if( params.containsKey("telefono")){
+            entrenador.setTelefono(params.get("telefono").toString());
+        }
+
+        Entrenador actualizado = entrenadorRepository.save(entrenador);
+        return EntrenadorMapper.toDto(actualizado);
     }
 
 }
