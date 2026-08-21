@@ -8,6 +8,7 @@ import org.yeye.miniligaapiv2.dto.EquipoResponseDto;
 import org.yeye.miniligaapiv2.service.EquipoService;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/equipo")
@@ -29,5 +30,10 @@ public class EquipoController {
     @GetMapping("/{id}")
     public ResponseEntity<EquipoResponseDto> getEquipoById(@PathVariable Long id){
         return ResponseEntity.ok(equipoService.getEquipoById(id));
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<EquipoResponseDto> actualizar(@PathVariable Long id, @RequestBody Map<String, Object> params){
+        return ResponseEntity.ok(equipoService.actualizarEquipo(id, params));
     }
 }
