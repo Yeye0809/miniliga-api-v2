@@ -27,8 +27,5 @@ public class Jugador {
     @JsonManagedReference
     private Equipo equipo;
 
-    @OneToMany( mappedBy = "jugador")
-    @JsonManagedReference
-    private List<EstadisticaJugador> estadisticaJugadores;
 
 }

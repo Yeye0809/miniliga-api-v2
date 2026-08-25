@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.yeye.miniligaapiv2.enums.FasePartido;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -36,6 +37,6 @@ public class Partido {
 
     private Integer GolequipoA;
     private Integer GolequipoB;
-    private LocalDate fecha;
+    private LocalDateTime fecha;
     private Boolean finalizado;
 }

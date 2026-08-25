@@ -1,12 +1,8 @@
 package org.yeye.miniligaapiv2.dto;
 
 import lombok.*;
-import org.yeye.miniligaapiv2.entity.Equipo;
-import org.yeye.miniligaapiv2.entity.EstadisticaJugador;
-import org.yeye.miniligaapiv2.entity.Partido;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Builder
 @Getter

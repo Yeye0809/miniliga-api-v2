@@ -13,9 +13,11 @@ import org.yeye.miniligaapiv2.repository.EquipoRepository;
 import org.yeye.miniligaapiv2.repository.PartidoRepository;
 import org.yeye.miniligaapiv2.repository.TorneoRepository;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class PartidoServiceImpl implements PartidoService {
@@ -60,6 +62,10 @@ public class PartidoServiceImpl implements PartidoService {
 
         List<Partido> partidos = new ArrayList<>();
 
+        //se asignan los equipos al partido, el primer equipo de la lista representado por (i) se enfrentara con los equipos restantes
+        // representados por (j),  al terminar la asignacion de los partidos del primer equios, pasa al siguiente que se enfrentara
+        // con los equipos despues de el
+        // A-b; A-C; A-D; B-C; B-D; C-D;
         for( int i = 0; i < equipos.size(); i++ ) {
             for( int j = i + 1;  j < equipos.size(); j++ ) {
                 Partido partido = new Partido();
@@ -74,4 +80,13 @@ public class PartidoServiceImpl implements PartidoService {
         return partidos;
     }
 
+    public void asignarFechaPartido(Long idPartido, Map<String, LocalDateTime> fechaPartido){
+        Partido partido = partidoRepository.findById(idPartido).orElseThrow(()-> new RuntimeException("partido no encontrado"));
+
+        if( fechaPartido.containsKey("fecha")){
+            partido.setFecha(fechaPartido.get("fecha"));
+        }
+
+        partidoRepository.save(partido);
+    }
 }

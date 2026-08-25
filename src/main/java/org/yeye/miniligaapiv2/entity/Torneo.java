@@ -32,9 +32,6 @@ public class Torneo {
     @JsonManagedReference
     private List<Partido> partidos;
 
-    @OneToMany( mappedBy = "torneo" )
-    @JsonManagedReference
-    private List<EstadisticaJugador> estadisticaJugadores;
     private Boolean activo;
 
     public void agregarPartido(Partido partido){
