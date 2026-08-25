@@ -32,4 +32,9 @@ public class PartidoController {
         partidoService.asignarFechaPartido(id,fechaPartido);
     }
 
+    @PatchMapping("/asignar-marcador/{id}")
+    public ResponseEntity<PartidoDto> asignarMarcador(@PathVariable Long id, @RequestBody Map<String, Integer> marcadores){
+        return ResponseEntity.ok(partidoService.asignarMarcador(id,marcadores));
+    }
+
 }

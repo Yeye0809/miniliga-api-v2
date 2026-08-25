@@ -2,7 +2,6 @@ package org.yeye.miniligaapiv2.dto;
 
 import lombok.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Builder

@@ -75,7 +75,7 @@ public class TorneoServiceImpl implements TorneoService{
                 Equipo equipo = equipos.get( i * 4 + j );
 
                 //se guarda el equipo en la lista de cada grupo
-                grupo.getEquipos().add(equipo);
+                grupo.agregarEquipo(equipo);
             }
 
             //guarda el grupo en la base de datos

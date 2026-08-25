@@ -13,5 +13,6 @@ public interface PartidoService {
     List<Partido> partidoFaseDeGrupos(Grupo grupo);
     List<PartidoDto> getPartidos(Long id);
     void asignarFechaPartido(Long idPartido, Map<String, LocalDateTime> fechaPartido);
+    PartidoDto asignarMarcador(Long id, Map<String, Integer> marcadores);
 
 }

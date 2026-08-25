@@ -86,7 +86,22 @@ public class PartidoServiceImpl implements PartidoService {
         if( fechaPartido.containsKey("fecha")){
             partido.setFecha(fechaPartido.get("fecha"));
         }
-
         partidoRepository.save(partido);
     }
+
+    public PartidoDto asignarMarcador(Long id, Map<String, Integer> marcadores){
+        Partido partido = partidoRepository.findById(id).orElseThrow(()-> new RuntimeException("partido no encontrado"));
+
+        if( marcadores.containsKey("equipoA") && marcadores.containsKey("equipoB") ){
+            partido.setGolequipoA(marcadores.get("equipoA"));
+            partido.setGolequipoB(marcadores.get("equipoB"));
+            partido.setFinalizado(true);
+        }else {
+            throw new RuntimeException("Debe ingresar los dos marcadores");
+        }
+
+
+        return PartidoMapper.toDto(partidoRepository.save(partido));
+    }
+
 }
