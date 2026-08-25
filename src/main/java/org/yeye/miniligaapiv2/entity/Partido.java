@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.yeye.miniligaapiv2.enums.FasePartido;
 
 import java.time.LocalDate;
 
@@ -29,6 +30,9 @@ public class Partido {
     @ManyToOne
     @JoinColumn( name = "torneo_id")
     private Torneo torneo;
+
+    @Enumerated(EnumType.STRING)
+    private FasePartido fase;
 
     private Integer GolequipoA;
     private Integer GolequipoB;

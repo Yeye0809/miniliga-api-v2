@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,26 +14,18 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Equipo {
+public class Grupo {
 
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nombre;
 
-    @OneToMany(mappedBy = "equipo")
-    private List<Jugador> jugadores;
+    private String nombre;
 
     @ManyToOne
     @JoinColumn(name = "torneo_id")
     private Torneo torneo;
 
-    @ManyToOne
-    @JoinColumn(name = "grupo_id")
-    private Grupo grupo;
-
-
-    @OneToOne
-    @JoinColumn(name = "entrenador_id")
-    private Entrenador entrenador;
+    @OneToMany( mappedBy = "grupo" )
+    private List<Equipo> equipos = new ArrayList<>();
 }
