@@ -116,10 +116,20 @@ public class PartidoServiceImpl implements PartidoService {
         partido.setEquipoA(local);
         partido.setEquipoB(visitante);
         partido.setGrupo(null);
+        partido.setTorneo(local.getTorneo());
         partido.setFinalizado(false);
         partido.setFase(FasePartido.CUARTOS);
 
         partidoRepository.save(partido);
+    }
+
+    @Override
+    public List<PartidoDto> getPartidosPorFase(Long idTorneo, FasePartido fase){
+       List<Partido> partidos = partidoRepository.findByTorneoIdAndFase(idTorneo, fase);
+
+       return partidos.stream()
+               .map(PartidoMapper::toDto)
+               .toList();
     }
 
 }

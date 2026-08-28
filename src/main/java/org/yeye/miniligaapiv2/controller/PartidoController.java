@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.yeye.miniligaapiv2.dto.PartidoDto;
+import org.yeye.miniligaapiv2.enums.FasePartido;
 import org.yeye.miniligaapiv2.service.PartidoService;
 
 import java.time.LocalDateTime;
@@ -40,6 +41,11 @@ public class PartidoController {
     @GetMapping("/partidos-por-grupo/{id}")
     public ResponseEntity<List<PartidoDto>> getPartidosPorGrupo(@PathVariable Long id){
         return ResponseEntity.ok(partidoService.getPartidoByGrupo(id));
+    }
+
+    @GetMapping("/{torneoId}/partidos")
+    public ResponseEntity<List<PartidoDto>> getPartidoPorFase(@PathVariable Long torneoId, @RequestParam FasePartido fase){
+        return ResponseEntity.ok(partidoService.getPartidosPorFase(torneoId,fase));
     }
 
 }
