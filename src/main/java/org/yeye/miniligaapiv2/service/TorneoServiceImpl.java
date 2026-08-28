@@ -10,10 +10,12 @@ import org.yeye.miniligaapiv2.entity.Grupo;
 import org.yeye.miniligaapiv2.entity.Partido;
 import org.yeye.miniligaapiv2.entity.Torneo;
 import org.yeye.miniligaapiv2.mapper.TorneoMapper;
+import org.yeye.miniligaapiv2.model.ClasificacionEquipo;
 import org.yeye.miniligaapiv2.repository.GrupoRepository;
 import org.yeye.miniligaapiv2.repository.PartidoRepository;
 import org.yeye.miniligaapiv2.repository.TorneoRepository;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,7 +30,8 @@ public class TorneoServiceImpl implements TorneoService{
     PartidoRepository partidoRepository;
     @Autowired
     private GrupoRepository grupoRepository;
-
+    @Autowired
+    ClasificacionService clasificacionService;
 
     @Override
     public TorneoResponseDto crearTorneo(TorneoRequestDto dto){
@@ -85,6 +88,34 @@ public class TorneoServiceImpl implements TorneoService{
             partidoRepository.saveAll(partidos);
 
         }
+    }
+
+    @Override
+    public void crearCuartosDeFinal(Long idTorneo){
+        List<Grupo> grupos = grupoRepository.findByTorneoId(idTorneo);
+
+       Grupo grupoA = grupos.get(0);
+       Grupo grupoB = grupos.get(1);
+       Grupo grupoC = grupos.get(2);
+       Grupo grupoD = grupos.get(3);
+
+        Equipo A1 = clasificacionService.obtenerClasificados(grupoA).get(0);
+        Equipo A2 = clasificacionService.obtenerClasificados(grupoA).get(1);
+
+        Equipo B1 = clasificacionService.obtenerClasificados(grupoB).get(0);
+        Equipo B2 = clasificacionService.obtenerClasificados(grupoB).get(1);
+
+        Equipo C1 = clasificacionService.obtenerClasificados(grupoC).get(0);
+        Equipo C2 = clasificacionService.obtenerClasificados(grupoC).get(1);
+
+        Equipo D1 = clasificacionService.obtenerClasificados(grupoD).get(0);
+        Equipo D2 = clasificacionService.obtenerClasificados(grupoD).get(1);
+
+        partidoService.crearPartidoCuartos(A1, B2);
+        partidoService.crearPartidoCuartos(B1, A2);
+        partidoService.crearPartidoCuartos(C1, D2);
+        partidoService.crearPartidoCuartos(D1, C2);
+
     }
 
 }

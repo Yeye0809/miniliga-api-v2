@@ -37,4 +37,9 @@ public class PartidoController {
         return ResponseEntity.ok(partidoService.asignarMarcador(id,marcadores));
     }
 
+    @GetMapping("/partidos-por-grupo/{id}")
+    public ResponseEntity<List<PartidoDto>> getPartidosPorGrupo(@PathVariable Long id){
+        return ResponseEntity.ok(partidoService.getPartidoByGrupo(id));
+    }
+
 }

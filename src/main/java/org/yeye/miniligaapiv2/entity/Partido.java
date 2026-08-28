@@ -32,6 +32,10 @@ public class Partido {
     @JoinColumn( name = "torneo_id")
     private Torneo torneo;
 
+    @ManyToOne
+    @JoinColumn( name = "grupo_id", nullable = true)
+    private Grupo grupo;
+
     @Enumerated(EnumType.STRING)
     private FasePartido fase;
 

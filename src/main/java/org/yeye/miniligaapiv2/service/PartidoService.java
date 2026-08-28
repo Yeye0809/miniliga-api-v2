@@ -1,6 +1,7 @@
 package org.yeye.miniligaapiv2.service;
 
 import org.yeye.miniligaapiv2.dto.PartidoDto;
+import org.yeye.miniligaapiv2.entity.Equipo;
 import org.yeye.miniligaapiv2.entity.Grupo;
 import org.yeye.miniligaapiv2.entity.Partido;
 
@@ -14,5 +15,7 @@ public interface PartidoService {
     List<PartidoDto> getPartidos(Long id);
     void asignarFechaPartido(Long idPartido, Map<String, LocalDateTime> fechaPartido);
     PartidoDto asignarMarcador(Long id, Map<String, Integer> marcadores);
+    List<PartidoDto> getPartidoByGrupo(Long grupoId);
+    void crearPartidoCuartos(Equipo local, Equipo visitante);
 
 }

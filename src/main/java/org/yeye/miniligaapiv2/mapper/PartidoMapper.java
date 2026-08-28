@@ -10,6 +10,7 @@ public class PartidoMapper {
                 .equipoA(partido.getEquipoA().getNombre())
                 .equipoB(partido.getEquipoB().getNombre())
                 .finalizado(partido.getFinalizado())
+                .fase(partido.getFase())
                 .build();
 
         if(partido.getFecha() != null)

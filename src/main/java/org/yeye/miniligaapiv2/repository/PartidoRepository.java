@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface PartidoRepository extends JpaRepository<Partido, Long> {
     List<Partido> findByTorneoId(Long torneoId);
+    List<Partido> findByGrupoId(Long grupoId);
 }

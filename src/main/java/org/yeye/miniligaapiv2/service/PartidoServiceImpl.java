@@ -73,6 +73,7 @@ public class PartidoServiceImpl implements PartidoService {
                 partido.setEquipoB(equipos.get(j));
                 partido.setFase(FasePartido.FASE_GRUPOS);
                 partido.setFinalizado(false);
+                partido.setGrupo(grupo);
                 torneo.agregarPartido(partido);
                 partidos.add(partido);
             }
@@ -89,6 +90,7 @@ public class PartidoServiceImpl implements PartidoService {
         partidoRepository.save(partido);
     }
 
+    @Override
     public PartidoDto asignarMarcador(Long id, Map<String, Integer> marcadores){
         Partido partido = partidoRepository.findById(id).orElseThrow(()-> new RuntimeException("partido no encontrado"));
 
@@ -99,9 +101,25 @@ public class PartidoServiceImpl implements PartidoService {
         }else {
             throw new RuntimeException("Debe ingresar los dos marcadores");
         }
-
-
         return PartidoMapper.toDto(partidoRepository.save(partido));
+    }
+
+    @Override
+    public List<PartidoDto> getPartidoByGrupo(Long grupoId){
+        return partidoRepository.findByGrupoId(grupoId).stream().map(PartidoMapper::toDto).toList();
+    }
+
+    @Override
+    public void crearPartidoCuartos(Equipo local, Equipo visitante) {
+        Partido partido = new Partido();
+
+        partido.setEquipoA(local);
+        partido.setEquipoB(visitante);
+        partido.setGrupo(null);
+        partido.setFinalizado(false);
+        partido.setFase(FasePartido.CUARTOS);
+
+        partidoRepository.save(partido);
     }
 
 }

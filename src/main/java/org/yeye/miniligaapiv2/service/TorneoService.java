@@ -8,4 +8,5 @@ public interface TorneoService {
 
     TorneoResponseDto crearTorneo(TorneoRequestDto dto);
     void crearFaseDeGrupos(Long IdTorneo);
+    void crearCuartosDeFinal(Long IdTorneo);
 }

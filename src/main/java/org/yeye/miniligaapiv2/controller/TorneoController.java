@@ -23,4 +23,10 @@ public class TorneoController {
     public void crearFaseDeGrupos(@PathVariable Long id) {
         torneoService.crearFaseDeGrupos(id);
     }
+
+    @PostMapping("/{id}/cuartos")
+    public void crearCuartosDeFinal(@PathVariable Long id) {
+        torneoService.crearCuartosDeFinal(id);
+    }
+
 }
