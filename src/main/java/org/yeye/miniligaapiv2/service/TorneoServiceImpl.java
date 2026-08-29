@@ -9,8 +9,8 @@ import org.yeye.miniligaapiv2.entity.Equipo;
 import org.yeye.miniligaapiv2.entity.Grupo;
 import org.yeye.miniligaapiv2.entity.Partido;
 import org.yeye.miniligaapiv2.entity.Torneo;
+import org.yeye.miniligaapiv2.enums.FasePartido;
 import org.yeye.miniligaapiv2.mapper.TorneoMapper;
-import org.yeye.miniligaapiv2.model.ClasificacionEquipo;
 import org.yeye.miniligaapiv2.repository.GrupoRepository;
 import org.yeye.miniligaapiv2.repository.PartidoRepository;
 import org.yeye.miniligaapiv2.repository.TorneoRepository;
@@ -117,5 +117,38 @@ public class TorneoServiceImpl implements TorneoService{
         partidoService.crearPartidoCuartos(D1, C2);
 
     }
+
+    @Override
+    public void crearSemifinal(Long idTorneo) {
+        Torneo torneo = torneoRepository.findById(idTorneo).orElseThrow(()-> new RuntimeException("torneo no encontrado"));
+        List<Partido> partidos = partidoRepository.findByTorneoIdAndFase(idTorneo, FasePartido.CUARTOS);
+        List<Equipo> semifinalistas = new  ArrayList<>();
+
+        for(Partido p : partidos){
+            Equipo equipo = deternminarGanador(p);
+            semifinalistas.add(equipo);
+        }
+
+        Equipo equipoA = semifinalistas.get(0);
+        Equipo equipoB = semifinalistas.get(1);
+        Equipo equipoC = semifinalistas.get(2);
+        Equipo equipoD = semifinalistas.get(3);
+
+        partidoService.crearPartidoDeEliminacion(equipoA, equipoB, torneo, FasePartido.SEMIFINAL);
+        partidoService.crearPartidoDeEliminacion(equipoC, equipoD, torneo, FasePartido.SEMIFINAL);
+
+    }
+
+    private Equipo deternminarGanador(Partido partido){
+
+        if( partido.getGolequipoA() > partido.getGolequipoB() ){
+            return partido.getEquipoA();
+        }
+        if( partido.getGolequipoB() > partido.getGolequipoA() ){
+            return partido.getEquipoB();
+        }
+        throw new RuntimeException("Error al detenerminar el ganador de cuartos de final");
+    }
+
 
 }

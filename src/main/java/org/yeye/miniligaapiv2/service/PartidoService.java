@@ -4,6 +4,7 @@ import org.yeye.miniligaapiv2.dto.PartidoDto;
 import org.yeye.miniligaapiv2.entity.Equipo;
 import org.yeye.miniligaapiv2.entity.Grupo;
 import org.yeye.miniligaapiv2.entity.Partido;
+import org.yeye.miniligaapiv2.entity.Torneo;
 import org.yeye.miniligaapiv2.enums.FasePartido;
 
 import java.time.LocalDateTime;
@@ -19,5 +20,6 @@ public interface PartidoService {
     List<PartidoDto> getPartidoByGrupo(Long grupoId);
     void crearPartidoCuartos(Equipo local, Equipo visitante);
     List<PartidoDto> getPartidosPorFase(Long idTorneo, FasePartido fase);
+    void crearPartidoDeEliminacion(Equipo equipoLocal, Equipo equipoVisitante, Torneo torneo, FasePartido fase);
 
 }

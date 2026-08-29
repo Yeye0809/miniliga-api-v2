@@ -132,4 +132,18 @@ public class PartidoServiceImpl implements PartidoService {
                .toList();
     }
 
+    @Override
+    public void crearPartidoDeEliminacion(Equipo equipoLocal, Equipo equipoVisitante, Torneo torneo, FasePartido fase){
+        Partido partido = new Partido();
+
+        partido.setEquipoA(equipoLocal);
+        partido.setEquipoB(equipoVisitante);
+        partido.setFase(fase);
+        partido.setTorneo(torneo);
+        partido.setGrupo(null);
+        partido.setFinalizado(false);
+
+        partidoRepository.save(partido);
+    }
+
 }

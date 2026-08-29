@@ -29,4 +29,9 @@ public class TorneoController {
         torneoService.crearCuartosDeFinal(id);
     }
 
+    @PostMapping("/{id}/semifinal")
+    public void crearSemifinal(@PathVariable Long id) {
+        torneoService.crearSemifinal(id);
+    }
+
 }
